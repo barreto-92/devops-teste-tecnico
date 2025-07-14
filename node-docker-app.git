@@ -1,0 +1,25 @@
+git add .
+git commit -m "Primeiro commit: app Node.js com Dockerfile"
+
+
+# Usa uma imagem oficial do Node.js como base
+FROM node:20-alpine
+
+# Cria um diretório de trabalho dentro do container
+WORKDIR /usr/src/app
+
+# Copia os arquivos de dependência
+COPY package*.json ./
+
+# Instala as dependências
+RUN npm install
+
+# Copia o restante do código da aplicação
+COPY . .
+
+# Expõe a porta que o app vai usar
+EXPOSE 3000
+
+# Comando que inicia a aplicação
+CMD ["node", "index.js"]
+
